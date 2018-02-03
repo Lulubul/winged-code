@@ -3,11 +3,18 @@ import * as React from 'react';
 import { Toolbar, AppBar, Typography, Paper, Tabs, Tab } from 'material-ui';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { teal } from 'material-ui/colors';
 
 const styles = {
   root: {
-    width: '100%',
+    width: '100%'
   },
+  appBar: {
+    backgroundColor: teal[400]
+  },
+  title: {
+    color: '#fff',
+  }
 };
 
 interface HeaderState {
@@ -40,9 +47,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   render() {
     return (
       <header style={styles.root}>
-        <AppBar position="static" color="inherit">
+        <AppBar position="static" style={styles.appBar}>
           <Toolbar>
-            <Typography type="title" color="inherit">
+            <Typography type="display3" style={styles.title}>
               Winged Code
             </Typography>
           </Toolbar>
