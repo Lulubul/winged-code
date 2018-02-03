@@ -6,7 +6,7 @@ export default class Home extends React.Component {
     return (
       <Grid container={true} xs={12} justify={'center'}>
         <Grid item={true} style={{ padding: 20 }}>
-          <Typography type="display2">Welcome to Winged Code!</Typography>
+          <Typography>Welcome to Winged Code!</Typography>
         </Grid>
       </Grid>
     );

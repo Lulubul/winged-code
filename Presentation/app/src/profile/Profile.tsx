@@ -6,7 +6,7 @@ class Profile extends React.Component {
         return (
             <Grid container={true} xs={12} justify={'center'}>
                 <Grid item={true} style={{ padding: 20 }}>
-                    <Typography type="display2">Hello I'm Daniel and this is my website</Typography>
+                    <Typography>Hello I'm Daniel and this is my website</Typography>
                 </Grid>
             </Grid>
         );
