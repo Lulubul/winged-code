@@ -18,7 +18,7 @@ const styles = {
 };
 
 interface HeaderState {
-  value: number;
+  pathName: string;
 }
 
 // tslint:disable-next-line:no-any
@@ -29,19 +29,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   constructor(props: HeaderProps) {
     super(props);
-    this.state = {
-      value: 0,
-    };
-  }
-
-  public handleChange = (event: React.FormEvent<HTMLSelectElement>, value: number) => {
-    this.setState({ value });
-    switch (value) {
-      case 0: this.props.history.push('/'); break;
-      case 1: this.props.history.push('/articles'); break;
-      case 2: this.props.history.push('/profile'); break;
-      default:  this.props.history.push('/'); 
-    }
+    this.state = { pathName: this.props.location.pathname};
   }
 
   render() {
@@ -56,19 +44,24 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         </AppBar>
         <Paper style={styles.root}>
           <Tabs
-            value={this.state.value}
+            value={this.state.pathName}
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
             centered={true}
           >
-            <Tab value={0} label="Home"/>
-            <Tab value={1} label="Articles"/>
-            <Tab value={2} label="Profile"/>
+            <Tab value={'/'} label="Home"/>
+            <Tab value={'/articles'} label="Articles"/>
+            <Tab value={'/profile'} label="Profile"/>
           </Tabs>
         </Paper>
       </header>
     );
+  }
+
+  private handleChange = (event: React.FormEvent<HTMLSelectElement>, newPath: string) => {
+    this.setState({ pathName: newPath });
+    this.props.history.push(newPath);
   }
 
 }
