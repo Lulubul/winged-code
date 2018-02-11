@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, Typography, ListItemText, ListItem, List, Avatar, ListItemAvatar } from 'material-ui';
-import WorkIcon from 'material-ui-icons/Folder';
+import WorkIcon from 'material-ui-icons/Work';
 
 const styles = {
     grid: {
@@ -19,6 +19,7 @@ class Profile extends React.Component {
                     <List dense={true}>
                         {workPlaces}
                     </List>
+                    <Typography>My journey on GitHub: <a href="https://github.com/Lulubul">Click</a></Typography>
                 </Grid>
             </Grid>
         );

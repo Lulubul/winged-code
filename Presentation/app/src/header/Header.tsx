@@ -7,14 +7,14 @@ import { teal } from 'material-ui/colors';
 
 const styles = {
   root: {
-    width: '100%'
+    width: '100vw'
   },
   appBar: {
     backgroundColor: teal[400]
   },
   title: {
     color: '#fff',
-  }
+  },
 };
 
 interface HeaderState {
@@ -37,9 +37,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <header style={styles.root}>
         <AppBar position="static" style={styles.appBar}>
           <Toolbar>
-            <Typography type="display3" style={styles.title}>
-              Winged Code
-            </Typography>
+            <Typography type="display3" style={styles.title}>Winged Code</Typography>
           </Toolbar>
         </AppBar>
         <Paper style={styles.root}>
