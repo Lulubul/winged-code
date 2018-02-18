@@ -7,8 +7,11 @@ import ShareIcon from 'material-ui-icons/Share';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 
 const styles = ({
+  item: {
+    maxWidth: 800,
+    width: '98%',
+  },
   card: {
-    maxWidth: 400,
     marginTop: 25
   },
   media: {
@@ -70,8 +73,8 @@ export default class Articles extends React.Component {
     ];
 
     return (
-      <Grid container={true} justify={'center'}>
-        <Grid item={true}>
+      <Grid container={true} justify={'center'} spacing={24}>
+        <Grid item={true} xs={12} style={styles.item}>
           {articles.map(article => this.createCard(article))}
         </Grid>
       </Grid>
@@ -80,7 +83,7 @@ export default class Articles extends React.Component {
 
   private createCard = (article: Article) => {
     return (
-      <Card style={styles.card} key={article.index}>
+      <Card key={article.index} style={styles.card}>
         <CardHeader
           avatar={<Avatar aria-label="Recipe" style={styles.avatar}> D </Avatar>}
           action={<IconButton><MoreVertIcon /></IconButton>}

@@ -5,9 +5,11 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { HashRouter } from 'react-router-dom';
 
-ReactDOM.render((
+ReactDOM.render(
+  (
   <HashRouter>
     <App />
   </HashRouter>
-  ),            document.getElementById('root')  as HTMLElement);
+  ),            
+  document.getElementById('root')  as HTMLElement);
 registerServiceWorker();
