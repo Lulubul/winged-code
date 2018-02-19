@@ -6,6 +6,10 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 
+import core from './images/core.png';
+import microservices from './images/microservices.png';
+import pwa from './images/pwa.png';
+
 const styles = ({
   item: {
     maxWidth: 800,
@@ -50,7 +54,7 @@ export default class Articles extends React.Component {
         index: 1,
         title: 'Intro into ASP.NET CORE 2',
         subheader: 'January 14, 2018',
-        image: 'https://goo.gl/dWF3c8',
+        image: core,
         summary: `NET Core MVC with controllers and views. Razor Pages is a new alternative in ASP.NET Core 2.0,
                   a page-based programming model that makes building web UI easier and more productive.`
       },
@@ -58,7 +62,7 @@ export default class Articles extends React.Component {
         index: 2,
         title: 'Micro Applications and Microservices Together',
         subheader: 'January 18, 2018',
-        image: 'https://goo.gl/5jJvUy',
+        image: microservices,
         summary: `This post discusses the integration between rich-UI and backend services. 
                   A rich-UI is decomposed as multiple logical pieces, each called a micro-application.
                   The backend services are similarly broken into multiple pieces as microservices.`
@@ -67,7 +71,7 @@ export default class Articles extends React.Component {
         index: 3,
         title: 'Progressive Web Apps',
         subheader: 'January 24, 2018',
-        image: 'https://goo.gl/dWfuVF',
+        image: pwa,
         summary: `A new way to deliver amazing user experiences on the web.`
       }
     ];

@@ -58,6 +58,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 
   private handleChange = (event: React.FormEvent<HTMLSelectElement>, newPath: string) => {
+    if (this.props.location.pathname === newPath) {
+      return;
+    }
     this.setState({ pathName: newPath });
     this.props.history.push(newPath);
   }
