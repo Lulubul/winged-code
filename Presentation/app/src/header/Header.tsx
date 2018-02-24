@@ -37,7 +37,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <header style={styles.root}>
         <AppBar position="static" style={styles.appBar}>
           <Toolbar>
-            <Typography type="display3" style={styles.title}>Winged Code</Typography>
+            <Typography style={styles.title}>Winged Code</Typography>
           </Toolbar>
         </AppBar>
         <Paper style={styles.root}>
