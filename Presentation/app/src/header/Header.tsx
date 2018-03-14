@@ -1,8 +1,7 @@
 
 import * as React from 'react';
 import { Toolbar, AppBar, Typography, Paper, Tabs, Tab } from 'material-ui';
-import { withRouter } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { teal } from 'material-ui/colors';
 
 const styles = {
@@ -21,13 +20,12 @@ interface HeaderState {
   pathName: string;
 }
 
-// tslint:disable-next-line:no-any
-interface HeaderProps extends RouteComponentProps<any> {
+interface HeaderProps {
 }
 
-class Header extends React.Component<HeaderProps, HeaderState> {
+class Header extends React.Component<RouteComponentProps<HeaderProps>, HeaderState> {
 
-  constructor(props: HeaderProps) {
+  constructor(props: RouteComponentProps<HeaderProps>) {
     super(props);
     this.state = { pathName: this.props.location.pathname};
   }
@@ -67,4 +65,5 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
 }
 
-export default withRouter(Header);
+// tslint:disable-next-line:no-any
+export default withRouter<RouteComponentProps<HeaderProps>>(Header as any);
