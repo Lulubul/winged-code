@@ -3,11 +3,13 @@ import {
     Typography, Grid, List, Paper, ListItemAvatar,
     ListItem, ListItemText, Avatar, StyledComponentProps, WithStyles, Chip, Divider
 } from 'material-ui';
+import * as firebase from 'firebase';
+require('firebase/firestore');
 import WorkIcon from 'material-ui-icons/Work';
 import withStyles from 'material-ui/styles/withStyles';
 import { StyleRules } from 'material-ui/styles';
 
-var styles: StyleRules = {
+const styles: StyleRules = {
     root: {
         display: 'flex',
         justifyContent: 'center',
@@ -27,24 +29,39 @@ var styles: StyleRules = {
     }
 };
 
+interface WorkPlace {
+    name: string;
+}
+
+interface Framework {
+    name: string;
+}
+
 interface ProfileState {
-    frameworks: { key: number; label: string }[];
+    frameworks: Framework[];
+    workplaces: WorkPlace[];
 }
 
 type PropsWithStyles = StyledComponentProps & WithStyles<keyof typeof styles>;
 
 class Profile extends React.Component<PropsWithStyles, ProfileState> {
 
+    private store: firebase.firestore.Firestore;
+
     constructor(props: PropsWithStyles) {
         super(props);
-        this.state = {
-            frameworks: [
-                { key: 0, label: 'Angular' },
-                { key: 1, label: 'React' },
-                { key: 2, label: 'ASP.Net Core' },
-                { key: 3, label: 'Vue.js' },
-            ],
-        };
+        this.store = firebase.firestore();
+        this.state = { workplaces: [], frameworks: [] };
+    }
+
+    async componentDidMount() {
+        const [workplaceSnapshot, frameworksSnapshot ] = await Promise.all([
+            this.store.collection('workplaces').get(),
+            this.store.collection('frameworks').get()
+        ]);
+        const workplaces = workplaceSnapshot.docs.map(doc => doc.data() as WorkPlace);
+        const frameworks = frameworksSnapshot.docs.map(doc => doc.data() as Framework);
+        this.setState({ workplaces: workplaces, frameworks: frameworks});
     }
 
     render() {
@@ -67,9 +84,9 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
                                 <Divider />
                             </li>
                             <li>
-                                {this.state.frameworks.map(data => {
+                                {this.state.frameworks.map((data, index) => {
                                     return (
-                                        <Chip key={data.key} label={data.label} className={this.props.classes.chip} />
+                                        <Chip key={index} label={data.name} className={this.props.classes.chip} />
                                     );
                                 })}
                             </li>
@@ -89,15 +106,10 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
     }
 
     private listWorkplaces = (): JSX.Element[] => {
-        const workPlaces = [
-            'AROBS Transilvania',
-            'Maxcode',
-            'Levi9 It Services',
-            'Freelancer',
-            'Evolve Media',
-            'Charge Studios'
-        ];
-        return workPlaces.map((workPlace, index) => this.creatWorkPlaceElement(workPlace, 'Software Developer', index));
+        return this.state.workplaces
+            .map((workPlace, index) =>  {
+                return this.creatWorkPlaceElement(workPlace.name, 'Software Developer', index);
+            });
     }
 
     private creatWorkPlaceElement = (workplace: string, position: string, index: number): JSX.Element => {
