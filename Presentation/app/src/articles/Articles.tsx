@@ -4,9 +4,7 @@ import {
 } from 'material-ui';
 import { CardMedia, CardContent, Typography, CardActions } from 'material-ui';
 import { red } from 'material-ui/colors';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import ShareIcon from 'material-ui-icons/Share';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
+import { Favorite, Share, MoreVert } from 'material-ui-icons';
 import * as firebase from 'firebase';
 require('firebase/firestore');
 import core from './images/core.png';
@@ -42,7 +40,7 @@ const articleStyle: StyleRules = {
   },
 };
 
-interface Article {
+interface ArticleInfo {
   title: string;
   pubDate: string;
   image: string;
@@ -50,19 +48,20 @@ interface Article {
 }
 
 interface ArticlesState {
-  articles: Article[];
+  articles: ArticleInfo[];
 }
 
 type PropsWithStyles = StyledComponentProps & WithStyles<keyof typeof articleStyle>;
 
 class Articles extends React.Component<PropsWithStyles, ArticlesState> {
-  private store: firebase.firestore.Firestore;
-  private images = { core, microservices, pwa };
+  private fireStore: firebase.firestore.Firestore;
+  private images = { core, microservices, pwa, hci };
 
   constructor(props: PropsWithStyles) {
     super(props);
     this.state = { articles: []};
-    this.store = firebase.firestore();
+    this.fireStore = firebase.firestore();
+    this.fireStore.settings({ timestampsInSnapshots: true});
   }
 
   render() {
@@ -73,55 +72,6 @@ class Articles extends React.Component<PropsWithStyles, ArticlesState> {
     return (
       <Grid container={true} justify={'center'} spacing={24}>
         <Grid item={true} xs={12} style={articleStyle.item}>
-        <Card key={0} style={articleStyle.card}>
-          <CardHeader
-            avatar={<Avatar aria-label="Recipe" style={articleStyle.avatar}> D </Avatar>}
-            action={<IconButton><MoreVertIcon /></IconButton>}
-            title="Human computer interaction"
-            subheader="project, infoiasi, hci"
-          />
-          <CardMedia
-            style={articleStyle.media}
-            image={hci}
-          />
-          <CardContent>
-            <Typography component="p">
-              I'm currently working on one educational project that involves Human computer interaction.
-              The project is trying to resurrect Street Figher II with <a href="https://www.vuforia.com/">Vuforia</a>
-              &nbsp;and &nbsp;<a href="https://unity3d.com/">Unity3d</a> using interaction design.
-            </Typography>
-            <hr/>
-            <Typography component="p">
-              Before doing anything at the project I've invested some time in reading 
-              about Information Architecture and Visual Design.
-              Also I've invested some days to discover more about branding and personas.
-              After that I've started with QOC (Questions, options and criteria) and with 3 ideas 
-              putted in 3 wireframes.
-            </Typography>
-            <hr/>
-            <Typography component="p">
-              After the documentation was complete I've decided to investigate 
-              &nbsp;<a href="https://proto.io/">Proto.io</a> .
-              A nice tool that allow you to create prototypes and lucky 
-              for me he has material design as default package.
-              So I've create a prototype for the app based on my wireframes using this cool tool. 
-              &nbsp;<a href="https://danielunguru.proto.io/projects/"> Take a look... </a>
-            </Typography>
-            <hr/>
-            <Typography component="p">
-              Follow the project progress at <a href="https://hci.gitbook.io/gamion/">GAMICON Gitbook</a> or&nbsp; 
-              <a href="https://github.com/Lulubul/HCI">GAMICON github</a>
-            </Typography>
-          </CardContent>
-          <CardActions style={articleStyle.actions} disableActionSpacing={true}>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="Share">
-              <ShareIcon />
-            </IconButton>
-          </CardActions>
-        </Card>
           {articles.map((article, index) => this.createCard(index, article))}
         </Grid>
       </Grid>
@@ -129,21 +79,22 @@ class Articles extends React.Component<PropsWithStyles, ArticlesState> {
   }
 
   componentDidMount() {
-    this.store
+    this.fireStore
       .collection('articles')
+      .orderBy('pubDate', 'desc')
       .get()
       .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
-        const articles: Article[] = querySnapshot.docs.map(doc => doc.data() as Article);
+        const articles: ArticleInfo[] = querySnapshot.docs.map(doc => doc.data() as ArticleInfo);
         this.setState({articles: articles});
       });
   }
 
-  private createCard = (index: number, article: Article) => {
+  private createCard = (index: number, article: ArticleInfo) => {
     return (
       <Card key={index} style={articleStyle.card}>
         <CardHeader
           avatar={<Avatar aria-label="Recipe" style={articleStyle.avatar}> D </Avatar>}
-          action={<IconButton><MoreVertIcon /></IconButton>}
+          action={<IconButton><MoreVert /></IconButton>}
           title={article.title}
           subheader={article.pubDate}
         />
@@ -158,10 +109,10 @@ class Articles extends React.Component<PropsWithStyles, ArticlesState> {
         </CardContent>
         <CardActions style={articleStyle.actions} disableActionSpacing={true}>
           <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
+            <Favorite />
           </IconButton>
           <IconButton aria-label="Share">
-            <ShareIcon />
+            <Share />
           </IconButton>
         </CardActions>
       </Card>
