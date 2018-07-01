@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "winged-code"
+    "default": "winged-code",
+    "production": "winged-code"
   }
 }

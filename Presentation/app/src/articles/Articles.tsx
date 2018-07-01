@@ -6,12 +6,13 @@ import { CardMedia, CardContent, Typography, CardActions } from 'material-ui';
 import { red } from 'material-ui/colors';
 import { Favorite, Share, MoreVert } from 'material-ui-icons';
 import * as firebase from 'firebase';
-require('firebase/firestore');
+import 'firebase/firestore';
 import core from './images/core.png';
 import microservices from './images/microservices.png';
 import pwa from './images/pwa.png';
 import hci from './images/hci.png';
 import { StyleRules } from 'material-ui/styles';
+import { StoreCollections } from '../shared/StoreCollections';
 
 const articleStyle: StyleRules = {
   item: {
@@ -80,7 +81,7 @@ class Articles extends React.Component<PropsWithStyles, ArticlesState> {
 
   componentDidMount() {
     this.fireStore
-      .collection('articles')
+      .collection(StoreCollections.Articles)
       .orderBy('pubDate', 'desc')
       .get()
       .then((querySnapshot: firebase.firestore.QuerySnapshot) => {

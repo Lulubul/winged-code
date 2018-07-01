@@ -4,10 +4,11 @@ import {
     ListItem, ListItemText, Avatar, StyledComponentProps, WithStyles, Chip, Divider
 } from 'material-ui';
 import * as firebase from 'firebase';
-require('firebase/firestore');
+import 'firebase/firestore';
 import WorkIcon from 'material-ui-icons/Work';
 import withStyles from 'material-ui/styles/withStyles';
 import { StyleRules } from 'material-ui/styles';
+import { StoreCollections } from '../shared/StoreCollections';
 
 const styles: StyleRules = {
     root: {
@@ -56,8 +57,8 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
 
     async componentDidMount() {
         const [workplaceSnapshot, frameworksSnapshot ] = await Promise.all([
-            this.store.collection('workplaces').get(),
-            this.store.collection('frameworks').get()
+            this.store.collection(StoreCollections.Workplaces).get(),
+            this.store.collection(StoreCollections.Frameworks).get()
         ]);
         const workplaces = workplaceSnapshot.docs.map(doc => doc.data() as WorkPlace);
         const frameworks = frameworksSnapshot.docs.map(doc => doc.data() as Framework);
