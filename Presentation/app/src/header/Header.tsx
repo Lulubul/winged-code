@@ -3,8 +3,9 @@ import * as React from 'react';
 import { Toolbar, AppBar, Typography, Paper, Tabs, Tab } from 'material-ui';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { teal } from 'material-ui/colors';
+import { StyleRules } from 'material-ui/styles';
 
-const styles = {
+const styles: StyleRules  = {
   root: {
     width: '100vw'
   },
@@ -13,6 +14,7 @@ const styles = {
   },
   title: {
     color: '#fff',
+    textAlign: 'center'
   },
 };
 
@@ -35,7 +37,7 @@ class Header extends React.Component<RouteComponentProps<HeaderProps>, HeaderSta
       <header style={styles.root}>
         <AppBar position="static" style={styles.appBar}>
           <Toolbar>
-            <Typography style={styles.title}>Winged Code</Typography>
+            <Typography variant="display3" style={styles.title}>Winged Code</Typography>
           </Toolbar>
         </AppBar>
         <Paper style={styles.root}>
