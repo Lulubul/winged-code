@@ -16,7 +16,9 @@ class App extends React.Component {
 
   constructor(props: {}) {
     super(props);
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   }
 
   render(): JSX.Element {

@@ -3,7 +3,7 @@ import {
     Typography, Grid, List, Paper, ListItemAvatar,
     ListItem, ListItemText, Avatar, StyledComponentProps, WithStyles, Chip, Divider
 } from 'material-ui';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import WorkIcon from 'material-ui-icons/Work';
 import withStyles from 'material-ui/styles/withStyles';
@@ -20,10 +20,9 @@ const styles: StyleRules = {
             padding: '20px',
         }
     },
-    grid: {
+    gridItem: {
         padding: '20px',
-        margin: 'auto',
-        width: '40%'
+        margin: 'auto'
     },
     chip: {
         margin: '5px',
@@ -52,6 +51,8 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
     constructor(props: PropsWithStyles) {
         super(props);
         this.store = firebase.firestore();
+        const settings = {/* your settings... */ timestampsInSnapshots: true};
+        this.store.settings(settings);
         this.state = { workplaces: [], frameworks: [] };
     }
 
@@ -62,43 +63,43 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
         ]);
         const workplaces = workplaceSnapshot.docs.map(doc => doc.data() as WorkPlace);
         const frameworks = frameworksSnapshot.docs.map(doc => doc.data() as Framework);
-        this.setState({ workplaces: workplaces, frameworks: frameworks});
+        this.setState({ workplaces, frameworks});
     }
 
     render() {
         const workPlaces = this.listWorkplaces();
         return (
             <Grid container={true} justify={'center'}>
-                <Grid item={true} style={styles.grid} >
+                <Grid item={true} style={styles.gridItem} xs={12}>
                     <Paper className={this.props.classes.root}>
                         <List dense={true}>
-                            <li>
+                            <ListItem>
                                 <Typography variant="title" align={'center'}>
                                     My journey as a Software Developer
                                 </Typography>
-                            </li>
-                            <li>
+                            </ListItem>
+                            <ListItem>
                                 <Divider />
-                            </li>
+                            </ListItem>
                             {workPlaces}
-                            <li>
+                            <ListItem>
                                 <Divider />
-                            </li>
-                            <li>
+                            </ListItem>
+                            <ListItem>
                                 {this.state.frameworks.map((data, index) => {
                                     return (
                                         <Chip key={index} label={data.name} className={this.props.classes.chip} />
                                     );
                                 })}
-                            </li>
-                            <li>
+                            </ListItem>
+                            <ListItem>
                                 <Divider />
-                            </li>
-                            <li>
+                            </ListItem>
+                            <ListItem>
                                 <Typography align={'center'} variant="title">
                                     My journey on GitHub: <a href="https://github.com/Lulubul">Click</a>
                                 </Typography>
-                            </li>
+                            </ListItem>
                         </List>
                     </Paper>
                 </Grid>

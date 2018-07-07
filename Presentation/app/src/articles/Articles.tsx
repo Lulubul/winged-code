@@ -5,7 +5,7 @@ import {
 import { CardMedia, CardContent, Typography, CardActions } from 'material-ui';
 import { red } from 'material-ui/colors';
 import { Favorite, Share, MoreVert } from 'material-ui-icons';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import core from './images/core.png';
 import microservices from './images/microservices.png';
