@@ -23,10 +23,10 @@ class App extends React.Component {
 
   render(): JSX.Element {
     return (
-      <div>
+      <>
         <Header/>
         <Main/>
-      </div>
+      </>
     );
   }
 }
