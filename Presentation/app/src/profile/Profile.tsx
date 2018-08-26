@@ -2,19 +2,16 @@ import * as React from 'react';
 import {
     Typography, Grid, List, Paper, ListItemAvatar,
     ListItem, ListItemText, Avatar, StyledComponentProps, WithStyles, Chip, Divider
-} from 'material-ui';
+} from '@material-ui/core';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import WorkIcon from 'material-ui-icons/Work';
-import withStyles from 'material-ui/styles/withStyles';
-import { StyleRules } from 'material-ui/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { StoreCollections } from '../shared/StoreCollections';
 
-const styles: StyleRules = {
+const styles = {
     root: {
         display: 'flex',
         justifyContent: 'center',
-        flexWrap: 'wrap',
         padding: '20px',
         li: {
             padding: '20px',
@@ -118,7 +115,7 @@ class Profile extends React.Component<PropsWithStyles, ProfileState> {
         return (
             <ListItem key={index}>
                 <ListItemAvatar>
-                    <Avatar><WorkIcon /></Avatar>
+                    <Avatar/>
                 </ListItemAvatar>
                 <ListItemText primary={workplace} secondary={position} />
             </ListItem>

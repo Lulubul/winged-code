@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { 
   Grid, CardHeader, Card, Avatar, IconButton, StyledComponentProps, WithStyles, withStyles
-} from 'material-ui';
-import { CardMedia, CardContent, Typography, CardActions } from 'material-ui';
-import { red } from 'material-ui/colors';
-import { Favorite, Share, MoreVert } from 'material-ui-icons';
-import firebase from 'firebase/app';
+} from '@material-ui/core';
+import { CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
+import { Favorite, Share, MoreVert } from '@material-ui/icons';
+import firebase from 'firebase';
 import 'firebase/firestore';
 import core from './images/core.png';
 import microservices from './images/microservices.png';
 import pwa from './images/pwa.png';
 import hci from './images/hci.png';
-import { StyleRules } from 'material-ui/styles';
 import { StoreCollections } from '../shared/StoreCollections';
 
-const articleStyle: StyleRules = {
+const articleStyle = {
   item: {
     maxWidth: 800,
     width: '98%',

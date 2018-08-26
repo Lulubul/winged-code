@@ -1,11 +1,10 @@
 
 import * as React from 'react';
-import { Toolbar, AppBar, Typography, Paper, Tabs, Tab } from 'material-ui';
+import { Toolbar, AppBar, Typography, Paper, Tabs, Tab } from '@material-ui/core';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { teal } from 'material-ui/colors';
-import { StyleRules } from 'material-ui/styles';
+import { teal } from '@material-ui/core/colors';
 
-const styles: StyleRules  = {
+const styles = {
   root: {
     width: '100vw'
   },
@@ -14,7 +13,7 @@ const styles: StyleRules  = {
   },
   title: {
     color: '#fff',
-    textAlign: 'center'
+    align: 'center'
   },
 };
 

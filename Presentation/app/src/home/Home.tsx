@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Typography } from 'material-ui';
+import { Grid, Typography } from '@material-ui/core';
 
 export default class Home extends React.Component {
   render() {

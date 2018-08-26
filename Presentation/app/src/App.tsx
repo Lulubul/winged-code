@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 import Main from './navigation/Main';
 import Header from './header/Header';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 require('firebase/firestore');
 
 const config = {
